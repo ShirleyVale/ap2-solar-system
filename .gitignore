@@ -9,3 +9,6 @@ Thumbs.db
 # 其他托管平台的本地配置不属于课程源码
 源码/.openai/
 
+# 本地课程提交压缩包（GitHub 已提供完整源码）
+AP2-Solar-System-source.zip
+

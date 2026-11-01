@@ -8,7 +8,7 @@
 
 ## 运行
 
-公网地址：**发布后写入**
+公网地址：[https://shirleyvale.github.io/ap2-solar-system/](https://shirleyvale.github.io/ap2-solar-system/)
 
 本地运行无需安装依赖。在项目根目录执行：
 
