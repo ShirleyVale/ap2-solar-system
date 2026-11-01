@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="AP2 三维层级场景：原生 WebGL 2.0 太阳系">
+  <title>AP2 · 太阳系层级场景</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="app-shell">
+    <canvas id="gl-canvas" aria-label="可交互的三维太阳系场景"></canvas>
+    <div class="space-noise" aria-hidden="true"></div>
+
+    <header class="masthead">
+      <div class="eyebrow">INTERACTIVE COMPUTER GRAPHICS · AP2</div>
+      <h1>太阳系 <span>层级场景</span></h1>
+      <p>曹玥雯 · 软件241 · 2406100102</p>
+    </header>
+
+    <section class="status-strip" aria-label="场景状态">
+      <span><i></i> WebGL 2.0</span>
+      <span>投影 <strong id="projection-status">透视</strong></span>
+      <span>相机 <strong id="camera-status">自动漫游</strong></span>
+      <span>模式 <strong id="alignment-status">自由运行</strong></span>
+    </section>
+
+    <aside class="control-panel" aria-label="太阳系参数面板">
+      <div class="panel-heading">
+        <div>
+          <span>SCENE CONTROL</span>
+          <h2>轨道实验台</h2>
+        </div>
+        <button id="reset-button" class="icon-button" type="button" title="重置视图（R）">R</button>
+      </div>
+
+      <div class="control-group">
+        <label for="orbit-speed"><span>公转速度</span><output id="orbit-value">1.0×</output></label>
+        <input id="orbit-speed" type="range" min="0" max="3" step="0.1" value="1">
+      </div>
+      <div class="control-group">
+        <label for="spin-speed"><span>自转速度</span><output id="spin-value">1.0×</output></label>
+        <input id="spin-speed" type="range" min="0" max="3" step="0.1" value="1">
+      </div>
+      <div class="control-group">
+        <label for="earth-tilt"><span>地球轴倾角</span><output id="tilt-value">23.5°</output></label>
+        <input id="earth-tilt" type="range" min="0" max="45" step="0.5" value="23.5">
+        <div class="range-marks"><span>0°</span><span>23.5°</span><span>45°</span></div>
+      </div>
+
+      <div class="switch-row">
+        <div>
+          <strong>轨道线</strong>
+          <small>显示层级运动路径</small>
+        </div>
+        <label class="switch">
+          <input id="show-orbits" type="checkbox" checked>
+          <span></span>
+        </label>
+      </div>
+
+      <div class="button-grid">
+        <button id="projection-button" type="button" aria-pressed="false">透视投影</button>
+        <button id="tour-button" type="button">暂停漫游</button>
+      </div>
+
+      <div class="select-group">
+        <label for="alignment">食相观察位</label>
+        <select id="alignment">
+          <option value="none">自由运行</option>
+          <option value="solar">日食：月球在中间</option>
+          <option value="lunar">月食：地球在中间</option>
+        </select>
+      </div>
+
+      <div id="eclipse-note" class="eclipse-note" hidden>
+        <b>太阳光沿径向照射</b>
+        <span>切换日食 / 月食可观察太阳—地球—月球三者的共线次序；本模式用于几何对齐演示。</span>
+      </div>
+    </aside>
+
+    <section class="legend" aria-label="天体图例">
+      <span class="legend-title">8 PLANETS</span>
+      <span><i style="--c:#9e958b"></i>水星</span>
+      <span><i style="--c:#d9aa65"></i>金星</span>
+      <span><i style="--c:#3d82df"></i>地球</span>
+      <span><i style="--c:#c85e3b"></i>火星</span>
+      <span><i style="--c:#c9a57c"></i>木星</span>
+      <span><i style="--c:#d9c18d"></i>土星</span>
+      <span><i style="--c:#7fd6df"></i>天王星</span>
+      <span><i style="--c:#3d64d8"></i>海王星</span>
+    </section>
+
+    <div class="interaction-hint">
+      <span><kbd>拖拽</kbd> 虚拟轨迹球</span>
+      <span><kbd>滚轮</kbd> 缩放</span>
+      <span><kbd>O</kbd> 双投影</span>
+      <span><kbd>SPACE</kbd> 漫游暂停 / 继续</span>
+    </div>
+
+    <div id="fallback" class="fallback" hidden></div>
+  </main>
+
+  <script src="Common/MV.js"></script>
+  <script src="Common/initShaders.js"></script>
+  <script src="Common/webgl-utils.js"></script>
+  <script src="js/config.js"></script>
+  <script src="js/geometry.js"></script>
+  <script src="js/trackball.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
